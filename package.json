@@ -1,0 +1,25 @@
+{
+  "repository": "https://github.com/wishabi/turbo_stimulus_example_project",
+  "name": "turbo_stimulus_example_project-frontend",
+  "version": "1.0.0",
+  "dependencies": {
+    "@hotwired/turbo-rails": "^7.0.0-beta.4",
+    "@rails/ujs": "^6.1.1",
+    "@rails/webpacker": "^5.2.1",
+    "babel-polyfill": "^6.26",
+    "fomantic-ui-css": "^2.8.7",
+    "jest-junit": "^5.2.0",
+    "jquery": "^3.5.1",
+    "stimulus": "^2.0"
+  },
+  "devDependencies": {
+    "jest": "^26",
+    "jslint": "^0.12",
+    "postcss-cssnext": "^3.1.0",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "scripts": {
+    "test": "JEST_JUNIT_OUTPUT=reports/unit-tests/junit-test-results.xml jest --forceExit --coverage --verbose --runInBand --passWithNoTests",
+    "lint": "jslint --project . --exclude 'node_modules/**/*'"
+  }
+}

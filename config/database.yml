@@ -1,0 +1,33 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  host: <%= ENV['DB_HOST'] || '127.0.0.1' %>
+  port: 3306
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 10
+  reconnect: true
+
+development: &development
+  <<: *default
+  database: turbo_stimulus_example_project_development
+  username: <%= ENV['TURBO_STIMULUS_EXAMPLE_PROJECT_DB_USERNAME'] || 'root' %>
+  password: <%= ENV['TURBO_STIMULUS_EXAMPLE_PROJECT_DB_PASSWORD'] %>
+
+test:
+  <<: *development
+  database: turbo_stimulus_example_project_test
+
+staging:
+  <<: *default
+  host: <%= ENV['DB_HOST'] %>
+  database: turbo_stimulus_example_project_staging
+  username: turbo_stimulus_example_project
+  password: <%= ENV['DB_PASSWORD'] %>
+
+production:
+  <<: *default
+  host: <%= ENV['DB_HOST'] %>
+  database: turbo_stimulus_example_project_production
+  username: turbo_stimulus_example_project
+  password: <%= ENV['DB_PASSWORD'] %>

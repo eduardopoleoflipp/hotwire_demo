@@ -1,0 +1,18 @@
+<%= content_for :title, 'Home Page' %>
+<%= content_for :description, 'You are home!' %>
+<h1>Welcome to Turbo Stimulus Example Project!</h1>
+
+<p>You can see Stimulus and Fomantic UI working below:</p>
+<div data-controller="test"> <!-- The code inside this div works with app/javascript/controllers/test_controller.js -->
+  <!-- Pass this into the controller as the "dropdown" target. When the select
+       value changes, call the "toggle" method on the controller.
+       The class of "ui dropdown" styles this as a Fomantic UI drop down element.
+  -->
+  <select class="ui dropdown" data-test-target="dropdown" data-action="change->test#toggle">
+    <option value="Option 1">Option 1</option>
+    <option value="Option 2">Option 2</option>
+  </select>
+
+  <!-- Pass this into the controller as the "output" target. -->
+  <div data-test-target="output"></div>
+</div>

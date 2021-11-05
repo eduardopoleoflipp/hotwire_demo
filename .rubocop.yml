@@ -1,0 +1,14 @@
+inherit_gem:
+  flipp_ruby_style: rubocop.yml
+
+AllCops:
+  Exclude:
+    - node_modules/**/*
+    - vendor/**/*
+    - db/schema.rb
+    - db/seeds.rb
+    - bin/setup_once
+    - Guardfile
+    - datadog/build_datadog.rb
+    - bin/*
+    - spec/rails_helper.rb
