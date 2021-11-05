@@ -1,0 +1,17 @@
+<div class="ui grid">
+  <div class="one wide column">
+    <% icon_class = task.completed? ? "check" : "exclamation" %>
+    <i class="circle icon <%= icon_class %> completed-icon"></i>
+  </div>
+
+  <div class="seven wide column">
+    <% status = task.completed? ? "completed" : "uncompleted" %>
+    Task <%= task.name %> was recently <%= status %>
+  </div>
+
+  <% if task.completed? %>
+    <div class="seven wide column">
+      Completed at <%= task.completed_at.strftime("%B %d, %Y") %>
+    </div>
+  <% end %>
+</div>

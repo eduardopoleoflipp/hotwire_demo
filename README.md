@@ -1,117 +1,87 @@
-# Turbo Stimulus Example Project
+# Topics
+- Stimulus vs Turbo
 
-| Branch  | Status |
-|---------|--------|
-| main  | [![CircleCI](https://circleci.wishabi.com/gh/wishabi/turbo_stimulus_example_project/tree/main.svg?style=svg&circle-token=526178bf3bfc819d97a3bb6698d5eabbfec0f8bc)](https://circleci.wishabi.com/gh/wishabi/turbo_stimulus_example_project/tree/main) |
+## Stimulus:
+- Controllers
+- Targets
+- Values
+- Controller Scoping
+  - Target Scoping and multiple controller per element
+  - Break away from Stimulus if necessary
+- Fomantic + JQuery + Stimulus
+  - Use Jquery When neccessary
+- Life cycle
+  - connect
+  - Stimulus 3 support for `target` lifecycle
+- Debugging
+  - Debugger
+- Controller - Controller communication
+  - Stimulus 3 support for events
+  - window dispatch as workaround
 
-Add documentation for your project here.
+## Turbo
+- Drive
+  - Links and forms
+- Frames
+  - Twitter create form
+  - 
+- Streams
+  - Updating multiple parts of the app 
+- Web Sockets
 
-## Table of Contents
+## Gotchas
+- Creating a turbo form request from the FE
+- Tables are a pain cuz the hoist wrappers to before where the table is
 
-* [Overview](#overview)
-* [Quick Links](#quick-links)
-* [Architecture](#architecture)
-* [Tech Stack](#tech-stack)
-* [Directory Structure](#directory-structure)
-* [Local Setup](#local-setup)
-* [Todo](#todo)
-* [Metrics](#metrics)
 
-## Overview
 
-Describe your service here.
 
-## Quick Links
 
-|   | Production | Staging |
-|---|:----------:|:-------:|
-| PrimeRadiant | [turbo_stimulus_example_project](https://prime-radiant.flippback.com/services/turbo_stimulus_example_project/services-ecs-prod) | [turbo_stimulus_example_project-stg](https://prime-radiant.flippback.com/services/turbo_stimulus_example_project-stg/services-ecs-stg) |
-| CircleCI | [main Branch](https://circleci.wishabi.com/gh/wishabi/turbo_stimulus_example_project/tree/main) | [Staging Branch](https://circleci.wishabi.com/gh/wishabi/turbo_stimulus_example_project/tree/staging) |  |
-| Datadog Dashboard | `TODO` | `TODO` |
 
-## Architecture
+Tutorial:
+- Broadcasting (on a index page of sort)
+  - Frame around the list
+    - To append a new tweet to the list when it gets created
+  - Frame around the actual tweet for when it gets updated
+    - To replace / destroy tweets when changes occur
+  GOTCHA: turbo_stream_from -> makes us think that streams are only for broadcasting.
+  The event will get picked up by where the stream is defined and then will find a frame to re
 
-Add links to architecture diagrams here.
+- Turbo Stream requests
+  - If there is not turbo_stream format rails will default to html
 
-### Tech Stack
+Requirements:
+- Routing
+- Controllers
+  - Requests formats
+- Views (IMPORTANT)
+  - Form Helpers
+  - Links
+  - Partials and locals
+- Models
+  - Persistance
+  - Callbacks (not very important mostly for broadcasting)
 
-* Docker & Docker Compose
-* Ruby 2.7: [Gem list](Gemfile)
-* Rails 6
 
-## Directory Structure
 
-```Text
-/.circleci            # CircleCI configuration
-/app                  # Core application code
-  /models             # Virtus models for produced topics
-  /schemas            # Avro schemas for produced and consumed messages
-/bin                  # Bundle, Rails, and Rake setups
-/config               #
-  /environments       # Rails environment configuration
-  /initializers       # Rails initializers & config
-  /settings           # Application settings configuration
-/datadog              # Datadog configuration
-/deploy               # Deployment scripts
-/one-for-all          # One-For-All scripts
-/one_click_dev        # Misc convenience scripts e.g. for compiling schemas, publishing to kafka, etc.
-/spec                 # RSpec unit tests
+Scratch pad
+
+```ruby
+# This will render the corresponding views/projects/create_turbo_stream.erb
+format.turbo_stream
+
+# You can also render directly from the controller using this syntax:
+format.turbo_stream {
+  render turbo_stream: turbo_stream.prepend(
+    'project-container',
+    partial: "project", locals: { project: @project }
+  )
+}
+# Yet using views is preferred.
+
+# If not turbo_stream format is defined then rails will default to a
+# html response which in this case just does a redirect
+# JSON will never be used
 ```
 
-## Local Setup
 
-First [install RVM](https://rvm.io/rvm/install). Make sure you have at least
-one Ruby version installed, e.g. by running `rvm install ruby --latest`.
-
-You will need to [install MySQL](https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html) before beginning.
-
-Finally, Run `bin/setup` to get your environment set up for development.
-
-## Linting
-
-Ruby `rubocop -a` to fix any auto-fixable offenses which would fail the lint step in CircleCI.
-You can run `rubocop -A` to fix offenses that may be "unsafe". Most of the time the "unsafe"
-part is pretty extreme edge cases, so you can try using `-A` as your default.
-
-## Todo
-To get your service up and running you may need to take the following steps:
-
-### Prime Radiant
-Change the Tasks / ELB Health Check Endpoint on your service to be `/ping` so
-that your service is not thought to be unhealthy and reset repeatedly.
-
-Set a Prime Radiant secret param for SECRET_KEY_BASE. Generate this key using
-`rails secret`. See `config/secrets.yml`.
-
-
-### RDS
-Request a RDS database by filing an Eng Cap ticket - and make sure the
-- `DB_PASSWORD` is in Prime Radiant Param Store
-- `DB_HOST` is a set ENV variable in Prime Radiant
-- The service database username is current in `config/database.yml`
-
-If you need to create these users yourself, do the following:
-* [Install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-* Use SSM to access gw2:
-
-```
-aws ssm start-session --target i-04218d
-```
-
-* Use MySQL to create the user (auto-generate a password using a site like
-[passwordsgenerator.net](https://passwordsgenerator.net/):
-
-```
-mysql -uadmin -p -h {rds_instance} <%= app_name %>_production
-> create user <%= app_name %>  identified by '{password}';
-> grant all on <%= app_name %>_production to <%= app_name %>;
-```
-
-## Metrics
-
-### Datadog Dashboards as Code
-The Datadog dashboard for this repo is generated via code, which can be found in the `./datadog` folder.
-
-***IMPORTANT: Modifications to the dashboard must be made in code.
-If changes are made manually via the Datadog webapp, then those changes will be blown away and overwritten
-the next time this application is deployed.***

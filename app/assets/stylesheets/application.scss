@@ -13,3 +13,84 @@
  *= require_tree .
  *= require_self
  */
+
+.trow {
+ 
+
+  div {
+    display: inline-block;
+    width: 100px;
+    height: 25px;
+    padding: 20px 0px;
+  }
+}
+
+.save-button {
+  width: 100px;
+  background: #2185d0;
+  border: 1px solid #2185d0;
+  padding: 10px 21px;
+  border-radius: 3px;
+  color: white;
+  font-size: 16px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.cancel-button {
+  width: 100px;
+  background: #a6a6a6;
+  border: 1px solid #a6a6a6;
+  padding: 10px 21px;
+  border-radius: 3px;
+  color: white;
+  font-size: 16px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.task-filter {
+  margin-bottom: 40px; 
+}
+
+.total-completed-container {
+  text-align: center;
+  margin-top: 40px;
+
+  h3 {
+    display: inline-block;
+    padding: 30px;
+  }
+}
+
+.exclamation {
+  color: #e6b800;
+}
+
+.check {
+  color: green;
+}
+
+.crossed {
+  text-decoration: line-through;
+}
+
+.task-name {
+  font-weight: 200;
+}
+
+h2 {
+  text-decoration: none;
+  color: black !important;
+  font-size: 40px;
+  font-weight: bold;
+  border-bottom: 0px solid black !important;
+}
+
+.text-align-right {
+  text-align: right;
+}

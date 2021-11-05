@@ -1,0 +1,14 @@
+<div 
+  class="ui tiny modal" data-controller="delete-modal"
+  id="delete-modal">
+  <i class="close icon"></i>
+  <div class="content modal-content">
+    <i class="exclamation circle icon modal-icon" style="color: #FFD454"></i>
+    <h3 class="modal-header">Are you sure you want to delete this task?</h3>
+    <button data-action="click->delete-modal#onDeleteTaskCancel" class="cancel-button"> Cancel </button>
+    <a href="#"
+       id="delete-link"
+       data-method="delete"
+       class='delete-link'>Delete</a>
+  </div>
+</div>

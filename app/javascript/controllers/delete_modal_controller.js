@@ -5,10 +5,11 @@ import { Controller } from "stimulus"
 import $ from 'jquery'
 
 export default class extends Controller {
-  static targets = ["output", "dropdown"];
+  static targets = [
+    "deleteLink"
+  ]
 
-  toggle() {
-    this.outputTarget.innerHTML = $(this.dropdownTarget).val() + " Selected!"
+  onDeleteTaskCancel() {
+    $('.tiny.modal').modal('hide')
   }
-
 }

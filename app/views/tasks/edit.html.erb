@@ -1,0 +1,19 @@
+<!--
+  Rules:
+  - Only the first instance of the response frame will be matched against the corresponding
+  browser frame
+  - Only the content inside the (browser) frame that initiated the request will be replaced
+  => So there's no point in having multiple frames with the same id. You want to be specific 
+  about what you want to swap.
+
+  - Nested frames on either side (server response or browser) have not effect on this either.
+  => Only the immediate parent frame gets the replaced by the response matching frame.
+
+  - This works for both links and forms submissions
+
+  All these rules are summarized in the first paragraph of https://turbo.hotwired.dev/handbook/frames
+-->
+
+<%= turbo_frame_tag dom_id(@task) do %>
+  <%= render 'horizontal_form', task: @task %>
+<% end %>

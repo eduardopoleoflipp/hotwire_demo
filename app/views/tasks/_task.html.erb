@@ -1,0 +1,33 @@
+<%= turbo_frame_tag dom_id(task) do %>
+<!-- 
+  Requests coming from links within this will add a header:
+  -H 'Turbo-Frame: <some_id>'
+  the server will then treat this request differently and it will only 
+  return just the view content without any layout.
+  Then the browser will replace any existing frame in the browser with
+  the matching frame that comes from the request
+-->
+  <div class="ui grid" data-controller="task" data-task-task-id-value="<%= task.id %>" id="task-<%= task.id %>">
+    <div class="four wide column">
+      <% task_name_class = task.completed? ? 'crossed' : '' %>
+      <span class="task-name <%= task_name_class %>"> 
+        <%= task.name %>
+      </span>
+    </div>
+
+    <div class="four wide column text-align-right">
+      <%= link_to 'Edit', edit_task_path(task) %>
+    </div>
+
+    <div class="four wide column text-align-right">
+      <!-- This toggle related thingys should be in a decorator -->
+      <% action = task.completed? ? "Uncomplete" : "Complete" %>
+      <%= link_to action, toggle_task_path(task), method: :post %>
+    </div>
+
+    <div class="four wide column text-align-right">
+      <a href="#" data-task-target="deleteLink" data-action="click->task#onShowDeleteConfirmation">Delete</a>
+    </div>
+  </div>
+<% end %>
+

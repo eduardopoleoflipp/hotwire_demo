@@ -1,0 +1,57 @@
+.ui.modal {
+  top: 30% !important;
+  padding: 20px;
+}
+
+#delete-modal {
+  .delete-link {
+    width: 80px;
+    background: #478FE9;
+    border: 1px solid #478FE9;
+    padding: 5px 20px;
+    border-radius: 3px;
+    color: white !important;
+    font-weight: 200 !important;
+    font-size: 15px;
+    margin-right: 10px;
+
+    &:hover {
+      cursor: pointer;
+      background: #478FE9;
+    }
+  }
+
+  .cancel-button {
+    width: 80px;
+    display: inline;
+    background: none;
+    border: 1px solid #EB5757;
+    padding: 4px 15px;
+    border-radius: 3px;
+    color: #EB5757;
+    font-size: 16px;
+    margin-right: 28px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .modal-content {
+    text-align: center;
+  }
+
+  .modal-icon {
+    color: #FFD454;
+    font-size: 30px !important;
+  }
+
+  .modal-header {
+    margin: 12px 0px;
+  }
+
+  .modal-helpertext {
+    color: #979797;
+    font-weight: 100;
+  }
+}

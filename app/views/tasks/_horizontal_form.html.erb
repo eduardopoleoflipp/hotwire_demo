@@ -1,0 +1,12 @@
+<%= form_with(model: task, html: { class: "ui form" }) do |form| %>
+  <div class="two fields">
+    <div class="field">
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= form.submit 'Update', class: "save-button" %>
+      <%= link_to "Cancel", task_path(task), class: "cancel-button" %>
+    </div>
+  </div>
+<% end %>

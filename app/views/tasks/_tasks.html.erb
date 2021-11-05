@@ -1,0 +1,33 @@
+<div class="ui grid">
+  <div class="four wide column">
+    <h1>Create a New task</h1>
+
+    <%= render 'tasks/form', task: @task, project: project %>
+  </div>
+
+  <div class="eight wide column">
+    <h1>Tasks</h1>
+    <div class="ui input focus task-filter" data-controller='filter' >
+      <input type="text" placeholder="Filter by Name" data-action="keyup->filter#onFilterResults" data-filter-target="filterInput" value="">
+    </div>
+
+    <!-- 
+      GOTCHA!
+      Turbo frames do no play out well with table rows. If you try to wrap the 
+      <tr></tr> elements with frames (or anything really) the wrappers will get 
+      hoisted to outside the table. 
+      https://discuss.hotwired.dev/t/how-to-wrap-a-table-row-with-a-turbo-frame/1717/3
+
+      This is relevant for us at Flipp cuz fomantic UI tables https://fomantic-ui.com/collections/table.html use native html table tags. So if you need this setup you'll
+      have to roll out your div base table like I'm showing before.
+    -->
+    <%= render partial: 'tasks/task_list', locals: { tasks: @tasks } %>
+  </div>
+
+  <div class="four wide column">
+    <h1>Recently Toggled</h1>
+    <div id="recently-completed">
+    </div>
+  </div>
+</div>
+<%= render partial: 'tasks/delete_modal' %>
