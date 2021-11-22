@@ -1,0 +1,14 @@
+<turbo-frame id="my-outer-id">
+  Some Outer content that will never show up
+
+  <turbo-frame id="my-inner-id">
+    Some server content that will replace the link
+  <turbo-frame/>
+<turbo-frame/>
+
+<br>
+
+<!-- Ids need to be respected and unique otherwise weird stuff happen -->
+<turbo-frame id="my-inner-id">
+  This frame content also shows up for some reason
+<turbo-frame/>

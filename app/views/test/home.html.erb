@@ -2,17 +2,35 @@
 <%= content_for :description, 'You are home!' %>
 <h1>Welcome to Turbo Stimulus Example Project!</h1>
 
-<p>You can see Stimulus and Fomantic UI working below:</p>
-<div data-controller="test"> <!-- The code inside this div works with app/javascript/controllers/test_controller.js -->
-  <!-- Pass this into the controller as the "dropdown" target. When the select
-       value changes, call the "toggle" method on the controller.
-       The class of "ui dropdown" styles this as a Fomantic UI drop down element.
-  -->
-  <select class="ui dropdown" data-test-target="dropdown" data-action="change->test#toggle">
-    <option value="Option 1">Option 1</option>
-    <option value="Option 2">Option 2</option>
-  </select>
+<%= link_to "Go to Projects Page", project_path("6") %>
 
-  <!-- Pass this into the controller as the "output" target. -->
-  <div data-test-target="output"></div>
-</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h1>Turbo frames Test</h1>
+<%= turbo_frame_tag "my-outer-id" do %>
+  This content should not change
+  <br>
+  <br>
+  <%= turbo_frame_tag "my-inner-id" do %>
+    <%= link_to "This link should be replaced", frame_test_path %>
+  <% end %>
+<% end %>
+
+<br>
+<br>
+<%= turbo_frame_tag "my-inner-id" do %>
+  This content is outside the link frame but has the same id. It should not
+  be replaced?
+<% end %>

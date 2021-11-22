@@ -16,17 +16,13 @@ class TasksController < ApplicationController
     @total_completed = @project.tasks.where.not(completed_at: nil).count
   end
 
-  # GET /tasks/1
   def show
     render '_task', locals: { task: @task }
   end
 
-  # GET /projects/1/edit
   def edit
   end
 
-  # POST /projects
-  # TODO: find a bit more info on how turbo drive works by default
   def create
     @task = Task.new(task_params)
 
@@ -42,7 +38,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1
   def update
     if @task.update(task_params)
       redirect_to @task, notice: 'Project was successfully updated.'

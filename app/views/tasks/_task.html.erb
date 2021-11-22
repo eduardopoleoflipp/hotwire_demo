@@ -1,12 +1,4 @@
 <%= turbo_frame_tag dom_id(task) do %>
-<!-- 
-  Requests coming from links within this will add a header:
-  -H 'Turbo-Frame: <some_id>'
-  the server will then treat this request differently and it will only 
-  return just the view content without any layout.
-  Then the browser will replace any existing frame in the browser with
-  the matching frame that comes from the request
--->
   <div class="ui grid" data-controller="task" data-task-task-id-value="<%= task.id %>" id="task-<%= task.id %>">
     <div class="four wide column">
       <% task_name_class = task.completed? ? 'crossed' : '' %>
@@ -16,6 +8,7 @@
     </div>
 
     <div class="four wide column text-align-right">
+      <!-- LINE TO EDIT will be processed through turbo frames -->
       <%= link_to 'Edit', edit_task_path(task) %>
     </div>
 

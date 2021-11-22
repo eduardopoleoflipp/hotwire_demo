@@ -9,9 +9,8 @@ Rails.application.routes.draw do
       post 'toggle'
     end
   end
-  get 'tasks/:id/row', to: 'tasks#task_row', as: :task_row
-  get 'home', to: 'test#home'
 
-  get 'ping', to: 'ping#index'
+  get 'home', to: 'test#home'
+  get 'frame_test', to: 'test#frame_test'
   root 'test#home'
 end

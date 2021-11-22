@@ -13,18 +13,20 @@
     <div class="results"></div>
   </div>
 
-  <div class="five wide column">
-    <h2><%= @project.name %></h2>
-  </div>
+  <% if @project.present? %>
+    <div class="five wide column">
+      <h2><%= @project.name %></h2>
+    </div>
 
-  <div class="five wide column">
-    <h2>
-      Total Tasks Completed:
-      <%= render partial: 'tasks/total_completed', locals: { 
-        total_completed: @total_completed 
-      }%>
-    </h3>
-  </div>
+    <div class="five wide column">
+      <h2>
+        Total Tasks Completed:
+        <%= render partial: 'tasks/total_completed', locals: { 
+          total_completed: @total_completed 
+        }%>
+      </h3>
+    </div>
+  <% end %>
 </div>
 
 

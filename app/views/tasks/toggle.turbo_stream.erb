@@ -1,4 +1,4 @@
-<%= turbo_stream.append "recently-completed" do %>
+<%= turbo_stream.append "recently-toggled" do %>
   <%= render partial: "recently_toggled", locals: { task: @task } %>
 <% end %>
 
@@ -6,6 +6,6 @@
   <%= render partial: "total_completed", locals: { total_completed: @total_completed } %>
 <% end %>
 
-<%= turbo_stream.replace "task-#{@task.id}" do %>
+<%= turbo_stream.replace dom_id(@task) do %>
   <%= render partial: "task", locals: { task: @task } %>
 <% end %>
