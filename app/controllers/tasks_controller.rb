@@ -46,10 +46,10 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
   def destroy
+    project = @task.project
     @task.destroy
-    redirect_to tasks_url, notice: 'Project was successfully destroyed.'
+    redirect_to project_path(project)
   end
 
   private

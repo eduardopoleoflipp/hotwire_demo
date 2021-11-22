@@ -13,13 +13,10 @@ export default class extends Controller {
   static values = { taskId: String }
 
   onShowDeleteConfirmation() {
-    // Reference the targets as
-    this.deleteLinkTarget
-
-    // Reference the value as 
-    this.taskIdValue
-
-    // Does some work related to delete confirmation:
-    // e.g show a confirmation modal
+    const deleteModalLink = $("#delete-link")
+    deleteModalLink.attr("href", `/tasks/${this.taskIdValue}`)
+    const modal = $("#delete-modal")
+    modal.modal({ detachable: false });
+    modal.modal("show");
   }
 }
